@@ -5,30 +5,37 @@
 <title>Odunju | Özel Tasarım Aydınlatma</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
+  margin: 0;
   background: #0f0f0f;
   height: 100vh;
   overflow: hidden;
   font-family: Arial, sans-serif;
+  cursor: pointer;
 }
 
-/* SAHNE */
+.start {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e0a15c;
+  font-size: 28px;
+  z-index: 10;
+  background: #0f0f0f;
+}
+
 .scene {
   position: absolute;
   bottom: -100%;
   width: 100%;
   height: 200%;
-  background: radial-gradient(circle at center, #1a1a1a, #000);
+  background: radial-gradient(circle, #1a1a1a, #000);
   animation: rise 3s ease forwards;
+  animation-play-state: paused;
 }
 
-/* METİN */
 .text-top {
   position: absolute;
   top: 35%;
@@ -37,11 +44,8 @@ body {
   color: #e0a15c;
   font-size: 34px;
   opacity: 0;
-  animation: fadeIn 2s ease forwards;
-  animation-delay: 2.5s;
 }
 
-/* LOGO */
 .logo {
   position: absolute;
   top: -300px;
@@ -49,11 +53,8 @@ body {
   transform: translateX(-50%);
   width: 280px;
   opacity: 0;
-  animation: fall 2s ease forwards;
-  animation-delay: 5s;
 }
 
-/* ALT METİN */
 .text-bottom {
   position: absolute;
   top: 60%;
@@ -62,73 +63,45 @@ body {
   color: #aaa;
   font-size: 22px;
   opacity: 0;
-  animation: fadeIn 2s ease forwards;
-  animation-delay: 6.5s;
 }
 
-/* ANİMASYONLAR */
+.play .scene { animation-play-state: running; }
+.play .text-top { animation: fadeIn 2s ease forwards 2.5s; }
+.play .logo { animation: fall 2s ease forwards 5s; }
+.play .text-bottom { animation: fadeIn 2s ease forwards 6.5s; }
+
 @keyframes rise {
   from { bottom: -100%; }
   to { bottom: 0; }
 }
-
 @keyframes fadeIn {
-  from { opacity: 0; }
   to { opacity: 1; }
 }
-
 @keyframes fall {
-  0% {
-    top: -300px;
-    opacity: 0;
-  }
-  70% {
-    top: 42%;
-    opacity: 1;
-  }
-  80% {
-    top: 40%;
-  }
-  100% {
-    top: 42%;
-  }
-}
-
-/* TİTREŞİM */
-.shake {
-  animation: shake 0.4s ease;
-}
-
-@keyframes shake {
-  0% { transform: translateX(-50%) translateY(0); }
-  25% { transform: translateX(-48%) translateY(2px); }
-  50% { transform: translateX(-52%) translateY(-2px); }
-  75% { transform: translateX(-49%) translateY(2px); }
-  100% { transform: translateX(-50%) translateY(0); }
+  0% { top: -300px; opacity: 0; }
+  70% { top: 42%; opacity: 1; }
+  100% { top: 42%; }
 }
 </style>
 </head>
 
 <body>
 
+<div class="start" id="start">Başlat</div>
+
 <audio id="sound" src="agac.mp3"></audio>
 
 <div class="scene"></div>
-
 <div class="text-top">Özel Tasarım</div>
-
-<img src="logo.png" class="logo" id="logo">
-
+<img src="logo.png" class="logo">
 <div class="text-bottom">Aydınlatma</div>
 
 <script>
-setTimeout(() => {
-  const sound = document.getElementById("sound");
-  const logo = document.getElementById("logo");
-
-  sound.play();
-  logo.classList.add("shake");
-}, 5000);
+document.getElementById("start").onclick = () => {
+  document.body.classList.add("play");
+  document.getElementById("sound").play();
+  document.getElementById("start").remove();
+};
 </script>
 
 </body>
