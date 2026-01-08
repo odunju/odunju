@@ -1,71 +1,75 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>Odunju | Özel Tasarım Aydınlatma</title>
+  <meta charset="UTF-8">
+  <title>Odunju | Özel Tasarım Aydınlatma</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #0b0b0b;
-  color: #f5f5f5;
-  font-family: Arial, sans-serif;
-  height: 100%;
-  overflow: hidden;
-}
+    .intro {
+      text-align: center;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 7s;
+    }
 
-#intro {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  animation: fadeOut 1.5s ease forwards;
-  animation-delay: 8s;
-}
+    .logo {
+      width: 260px;
+      animation: fall 2s ease forwards;
+      animation-delay: 5s;
+      opacity: 0;
+    }
 
-.logo {
-  width: 200px;
-  animation: fall 1.2s ease-out forwards;
-  animation-delay: 6.5s;
-}
+    .text {
+      color: #e0a15c;
+      font-size: 26px;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease forwards;
+    }
 
-h1 {
-  margin-top: 30px;
-  font-size: 22px;
-  letter-spacing: 2px;
-  opacity: 0;
-  animation: textIn 1.5s ease forwards;
-  animation-delay: 2s;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-@keyframes textIn {
-  to { opacity: 1; }
-}
+    @keyframes fall {
+      0% {
+        transform: translateY(-200px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
 
-@keyframes fall {
-  0% { transform: translateY(-200px); opacity: 0; }
-  70% { transform: translateY(20px); opacity: 1; }
-  100% { transform: translateY(0); }
-}
-
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
-</style>
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+  </style>
 </head>
-
 <body>
 
-<div id="intro">
-  <h1>Özel Tasarım Aydınlatma</h1>
-  <img src="logo.png" class="logo" alt="Odunju Logo">
-  <audio autoplay>
-    <source src="agac.mp3" type="audio/mpeg">
-  </audio>
-</div>
+  <audio id="sound" src="agac.mp3"></audio>
+
+  <div class="intro">
+    <div class="text">Özel Tasarım Aydınlatma</div>
+    <img src="logo.png" class="logo" alt="Odunju Logo">
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById("sound").play();
+    }, 5000);
+  </script>
 
 </body>
 </html>
